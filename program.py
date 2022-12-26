@@ -10,14 +10,13 @@ def valideArgv(argv):
         return False
     
     if not re.search(r"\w+.json",argv[0]):
-        print("Argument 1 needs to be json filename")
+        print("Argument 1 needs to be the program slices in JSON format")
         return False
     
     if not re.search(r"\w+.json",argv[1]):
-        print("Argument 2 needs to be json filename")
+        print("Argument 2 needs to be the security pattern in JSON format")
         return False
-
-    
+        
     return True
 
 
@@ -35,15 +34,15 @@ def writeOutputToJson(outputFilename,output):
         json.dump(output, outputFile)
 
 def main(argv):
-    if not valideArgv(argv):
-        return
-    
+
+    valideArgv(argv)
     print("argv validated")
 
     sliceExpressionsList = parseJsonToDict(argv[0])
     print("slices loaded")
     vulnerabilitiesPatternsList = parseJsonToDict(argv[1])
     print("vulnerabilities patterns loaded")
+
     output = []
     for vulnerability in vulnerabilitiesPatternsList:
         output.append(validator.testVulnerabilityinSlice(vulnerability, sliceExpressionsList))

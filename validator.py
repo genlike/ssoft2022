@@ -1,5 +1,3 @@
-
-
 def testVulnerabilityinSlice(vulnerability, expressionsSlice):
     print("Testing")
     print(vulnerability)
